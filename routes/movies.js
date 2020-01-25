@@ -6,7 +6,19 @@ var router = express.Router();
 const Movies = require('../models/Movies');
 
 router.get('/', (req, res) => {
-  const promise = Movies.find({  });
+  const promise = Movies.aggregate([
+    {
+      $lookup: {
+        from: 'directors',
+        localField: 'director_id',
+        foreignField: '_id',
+        as : 'director'
+      }
+    },
+    {
+      $unwind: '$director'
+    }
+  ]);
   promise.then((data) => {
     res.json(data);
   }).catch((err) => {
