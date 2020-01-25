@@ -27,5 +27,5 @@
 
 | Route | HTTP Verb	 | POST body	 | Description	 |
 | --- | --- | --- | --- |
-| /register | `POST` | { username: 'foo', password:'1234' } | Create a new user. |
-| /authenticate | `POST` | { username: 'foo', password:'1234' } | Generate a token. |
+| /register | `POST` | { username: 'foo', password:'123456' } | Create a new user. |
+| /authenticate | `POST` | { username: 'foo', password:'123456' } | Generate a token. |
