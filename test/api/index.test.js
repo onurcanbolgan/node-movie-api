@@ -15,3 +15,22 @@ describe('Node Server', () => {
            });
    });
 });
+
+describe('Register', () => {
+   it('(POST /register) returns register', (done) => {
+       const user = {
+           username: 'firstcheck',
+           password: 'havehave'
+       }
+       chai.request(server)
+       .post('/register')
+           .send(user)
+           .end((err, res) => {
+              res.should.have.status(200);
+              res.body.should.be.a('object');
+              res.body.should.have.property('username');
+              res.body.should.have.property('password');
+              done();
+           });
+   });
+});

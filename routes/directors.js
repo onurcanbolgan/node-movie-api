@@ -48,9 +48,10 @@ router.get('/', function(req, res, next) {
         },
         {
             $project: {
-                _id: '$_id.id',
+                _id: '$_id._id',
                 name: '$_id.name',
                 surname: '$_id.surname',
+                bio: '$_id.bio',
                 movies: '$movies'
             }
         }
@@ -98,15 +99,16 @@ router.get('/:director_id', function(req, res, next) {
         },
         {
             $project: {
-                _id: '$_id.id',
+                _id: '$_id._id',
                 name: '$_id.name',
                 surname: '$_id.surname',
+                bio: '$_id.bio',
                 movies: '$movies'
             }
         }
     ]);
     promise.then((data) => {
-        res.json(data);
+        res.json(data[0]);
     }).catch((err) => {
         res.json(err);
     });
@@ -121,7 +123,7 @@ router.put('/:director_id', (req, res,next) => {
     promise.then((director) => {
         if (!director)
             next({ message:'The director was not found.', code:99 });
-        res.json({status:1, director:director});
+        res.json(director);
     }).catch((err) => {
         res.json(err);
     })
