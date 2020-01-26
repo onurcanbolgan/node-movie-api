@@ -55,7 +55,7 @@ describe('api/movies test', () => {
                });
        }) ;
     });
-    describe('/GET/:director_id movie', () => {
+    describe('/GET/:movie_id movie', () => {
        it('it should GET a movie by the given id', (done) => {
           chai.request(server)
               .get('/api/movies/'+movieId)
@@ -73,5 +73,46 @@ describe('api/movies test', () => {
                   done();
               });
        });
+    });
+    describe('/PUT/:movie_id movie', () => {
+        it('it should update a movie given by id', (done) => {
+            const movie = {
+                title: '93creative',
+                director_id: '5e2c4d7fa8373a1d74ea8251',
+                category: 'Scary',
+                country: 'France',
+                year: 1998,
+                imdb_score: 8
+            };
+            chai.request(server)
+                .put('/api/movies/' + movieId)
+                .send(movie)
+                .set('x-access-token',token)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('title').eql(movie.title);
+                    res.body.should.have.property('director_id').eql(movie.director_id);
+                    res.body.should.have.property('category').eql(movie.category);
+                    res.body.should.have.property('country').eql(movie.country);
+                    res.body.should.have.property('year').eql(movie.year);
+                    res.body.should.have.property('imdb_score').eql(movie.imdb_score);
+                    done();
+                });
+        }) ;
+    });
+    describe('/DELETE/:movie_id movie', () => {
+        it('it should delete a movie given by id', (done) => {
+            chai.request(server)
+                .delete('/api/movies/' + movieId)
+                .set('x-access-token',token)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('status').eql(1)
+                    res.body.should.have.property('deleted').eql(true);
+                    done();
+                });
+        }) ;
     });
 });
