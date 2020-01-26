@@ -11,6 +11,8 @@
     "bcrypt": "^3.0.7",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "clean-css": "^4.2.2",
+    "constantinople": "^4.0.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
