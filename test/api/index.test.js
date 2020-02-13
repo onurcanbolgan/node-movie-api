@@ -28,8 +28,8 @@ describe('Register', () => {
            .end((err, res) => {
               res.should.have.status(200);
               res.body.should.be.a('object');
-              res.body.should.have.property('username');
-              res.body.should.have.property('password');
+              res.body.should.have.property('status',true);
+              res.body.should.have.property('token');
               done();
            });
    });
